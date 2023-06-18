@@ -25,7 +25,7 @@ class BooksViewModel(
         getBooks()
     }
 
-    private fun getBooks(query: String = "book", maxResult: Int = 40) {
+    fun getBooks(query: String = "book", maxResult: Int = 40) {
         _booksUiState.tryEmit(BooksUiState.Loading)
         viewModelScope.launch(CoroutineExceptionHandler { _, throwable ->
             Log.e("error", "Error", throwable)
