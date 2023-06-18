@@ -3,7 +3,6 @@ package com.example.bookhouse.network.model
 data class VolumeInfo(
     val allowAnonLogging: Boolean,
     val authors: List<String>,
-    val averageRating: Int,
     val canonicalVolumeLink: String,
     val categories: List<String>,
     val contentVersion: String,
