@@ -14,6 +14,7 @@ import com.example.bookhouse.data.model.Books
 @Composable
 fun BooksGrid(
     books: List<Books>,
+    onBookClicked: (Books) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -21,7 +22,7 @@ fun BooksGrid(
         contentPadding = PaddingValues(4.dp)
     ) {
         itemsIndexed(books) { _, dataBooks ->
-            BooksItem(books = dataBooks)
+            BooksItem(books = dataBooks, onBookClicked)
         }
     }
 }
@@ -30,6 +31,7 @@ fun BooksGrid(
 @Composable
 fun BooksGridPreview() {
     BooksGrid(
-        books = listData
+        books = listData,
+        onBookClicked = { listData }
     )
 }

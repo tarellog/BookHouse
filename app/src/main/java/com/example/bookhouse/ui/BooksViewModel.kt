@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.bookhouse.BooksApplication
 import com.example.bookhouse.data.repository.BooksRepository
+import com.example.bookhouse.ui.booksscreen.searchtoolbar.SearchToolbarState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,6 +21,12 @@ class BooksViewModel(
 
     private val _booksUiState = MutableStateFlow<BooksUiState>(BooksUiState.Loading)
     val booksUiState = _booksUiState.asStateFlow()
+
+    private val _searchToolbarState = MutableStateFlow<SearchToolbarState>(SearchToolbarState.CLOSED)
+    val searchToolbarState = _searchToolbarState.asStateFlow()
+
+    private val _searchText = MutableStateFlow("")
+    val searchText = _searchText.asStateFlow()
 
     init {
         getBooks()
@@ -36,6 +43,14 @@ class BooksViewModel(
                 _booksUiState.tryEmit(BooksUiState.Success(booksRepository.getBooks(query, maxResult)))
 
         }
+    }
+
+    fun updateSearchState(searchToolbarState: SearchToolbarState) {
+        _searchToolbarState.tryEmit(searchToolbarState)
+    }
+
+    fun updateSearchText(query: String) {
+        _searchText.tryEmit(query)
     }
 
     companion object {

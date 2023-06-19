@@ -1,5 +1,6 @@
 package com.example.bookhouse.ui.booksscreen.booksitem
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,13 +26,15 @@ import com.example.bookhouse.data.model.Books
 @Composable
 fun BooksItem(
     books: Books,
+    onBookClicked: (Books) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
             .padding(4.dp)
             .fillMaxWidth()
-            .requiredHeight(296.dp),
+            .requiredHeight(296.dp)
+            .clickable { onBookClicked(books) },
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -56,5 +59,5 @@ fun BooksItem(
 @Preview(showBackground = false)
 @Composable
 fun BooksItemPreview() {
-    BooksItem(books = listData[3])
+    BooksItem(books = listData[3], onBookClicked = { listData})
 }
